@@ -1,0 +1,64 @@
+.admin-center {
+	max-width: 80%;
+	margin: auto;
+	margin-top: 2%;
+	padding: 20px;
+	border: 1px solid #ccc;
+	border-radius: 8px;
+	box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+	background-color: #f9f9f9;
+}
+
+h1 {
+	text-align: center;
+	margin-bottom: 20px;
+}
+
+button {
+	margin-bottom: 20px;
+	padding: 10px 15px;
+	background-color: #007bff;
+	color: white;
+	border: none;
+	border-radius: 4px;
+	cursor: pointer;
+	font-size: 16px;
+}
+
+button:hover {
+	background-color: #0056b3;
+}
+
+.center-table {
+	width: 100%;
+	border-collapse: collapse;
+}
+
+.center-table th,
+.center-table td {
+	padding: 10px;
+	text-align: left;
+	border-bottom: 1px solid #ddd;
+}
+
+.center-table th {
+	background-color: #007bff;
+	color: white;
+}
+
+.center-table tr:hover {
+	background-color: #f1f1f1;
+}
+
+.delete-icon {
+	color: red; /* Color for the delete icon */
+	cursor: pointer;
+	text-align: center;
+}
+
+.no-data {
+	text-align: center;
+	color: #888;
+	font-style: italic;
+	padding: 20px 0;
+}

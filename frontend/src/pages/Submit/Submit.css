@@ -1,0 +1,84 @@
+.add {
+	padding: 20px;
+	max-width: 600px;
+	margin: auto;
+	background-color: #f9f9f9;
+	border-radius: 10px;
+	box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.flex-col {
+	display: flex;
+	flex-direction: column;
+}
+
+.add-img-upload {
+	margin-bottom: 20px;
+	align-items: center;
+}
+
+.add-img-upload p {
+	margin-bottom: 10px;
+	font-weight: bold;
+}
+
+.add-img-upload label {
+	cursor: pointer;
+}
+
+.add-img-upload img {
+	width: 100%;
+	height: auto;
+	border: 2px dashed #ccc;
+	border-radius: 8px;
+	transition: border-color 0.3s;
+}
+
+.add-img-upload img:hover {
+	border-color: #007bff;
+}
+
+.add-product-name,
+.add-product-description {
+	margin-bottom: 15px;
+}
+
+.add-product-name p,
+.add-product-description p {
+	margin-bottom: 5px;
+	font-weight: bold;
+}
+
+select,
+input[type="text"] {
+	padding: 10px;
+	border: 1px solid #ccc;
+	border-radius: 5px;
+	font-size: 16px;
+}
+
+select:focus,
+input[type="text"]:focus {
+	border-color: #007bff;
+	outline: none;
+}
+
+.add-btn {
+	padding: 10px;
+	background-color: #007bff;
+	color: white;
+	border: none;
+	border-radius: 5px;
+	font-size: 16px;
+	cursor: pointer;
+	transition: background-color 0.3s;
+}
+
+.add-btn:hover {
+	background-color: #0056b3;
+}
+
+.add-btn:disabled {
+	background-color: #ccc;
+	cursor: not-allowed;
+}

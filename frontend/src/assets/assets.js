@@ -2,7 +2,7 @@ import basket_icon from "./basket_icon.png";
 import logo from "./logo.png";
 import header_img from "./header_img.png";
 import search_icon from "./search_icon.png";
-
+import upload_area from "./upload_area.png";
 import recycle from "./Recycle.png"; // Correct import for Recycle image
 import dispose from "./Dispose.png"; // Correct import for Dispose image
 import donate from "./Donate.png"; // Correct import for Donate image
@@ -43,6 +43,7 @@ export const assets = {
 	logout_icon,
 	bag_icon,
 	parcel_icon,
+	upload_area,
 };
 
 export const option_list = [
