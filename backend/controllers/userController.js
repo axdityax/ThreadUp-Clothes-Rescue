@@ -169,4 +169,32 @@ const getAllAddress = async (req, res) => {
 	}
 };
 
-export { registerUser, loginUser, getAllAddress, addAddress, removeAddress };
+const getAddressById = async (req, res) => {
+	const userId = req.user.id; // Get the ID of the authenticated user
+	const { id } = req.params; // Get the address ID from the request parameters
+
+	try {
+		// Find the address by ID and ensure it belongs to the authenticated user
+		const address = await addressModel.findOne({ _id: id, user: userId });
+
+		if (!address) {
+			return res.status(404).json({
+				success: false,
+				message: "Address not found or does not belong to the user",
+			});
+		}
+
+		res.status(200).json({
+			success: true,
+			data: address,
+		});
+	} catch (error) {
+		console.error("Error fetching address:", error);
+		res.status(500).json({
+			success: false,
+			message: "Error fetching address",
+		});
+	}
+};
+
+export { registerUser, loginUser, getAllAddress, addAddress, removeAddress, getAddressById };

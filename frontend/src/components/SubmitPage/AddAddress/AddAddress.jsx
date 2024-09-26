@@ -42,7 +42,7 @@ const AddAddress = () => {
 
 			if (response.data.success) {
 				alert("Address added successfully!");
-				navigate("/address"); // Redirect to the address list
+				navigate("/submit"); // Redirect to the address list
 			} else {
 				setError(response.data.message || "Failed to add address.");
 			}

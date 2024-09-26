@@ -1,135 +1,97 @@
-import React, { useState, useEffect, useContext } from "react";
-import axios from "axios";
-import { useNavigate } from "react-router-dom";
-import { StoreContext } from "../../../context/StoreContext";
-import "./Step2.css";
-import { toast } from "react-toastify"; // Ensure toast is used correctly
+import React from "react";
+import { assets } from "../../../assets/assets";
+import "./Step2.css"; // Assuming Step2.css is in the same directory
 
-const Step2 = ({ onNext, previousData }) => {
-	const [addresses, setAddresses] = useState([]);
-	const [selectedAddress, setSelectedAddress] = useState("");
-	const { url } = useContext(StoreContext);
-	const navigate = useNavigate();
-
-	const fetchAddresses = async () => {
-		try {
-			const token = localStorage.getItem("token");
-			const config = {
-				headers: { token }, // Pass token in Authorization header
-			};
-
-			// Fetch user addresses
-			const response = await axios.get(`${url}/api/user/alladdress`, config);
-			if (response.data && response.data.success) {
-				setAddresses(response.data.data);
-			} else {
-				console.error(
-					"Error fetching addresses:",
-					response.data.message || "Unknown error"
-				);
-			}
-		} catch (error) {
-			console.error("Error fetching addresses:", error);
-		}
-	};
-
-	const removeAddress = async (addressId) => {
-		try {
-			const token = localStorage.getItem("token");
-			const config = {
-				headers: { token }, // Pass token in Authorization header
-			};
-
-			const response = await axios.post(
-				`${url}/api/user/address/remove`,
-				{ id: addressId },
-				config
-			);
-			if (response.data.success) {
-				toast.success("Address removed successfully!");
-				fetchAddresses();
-			} else {
-				toast.error("Failed to remove address.");
-			}
-		} catch (error) {
-			console.error("Error removing address:", error);
-			toast.error("An error occurred while removing the address.");
-		}
-	};
-
-	useEffect(() => {
-		fetchAddresses();
-	}, [url]);
-
-	const handleNext = (event) => {
-		event.preventDefault();
-		if (!selectedAddress) {
-			alert("Please select an address.");
-			return;
-		}
-		onNext({ ...previousData, address: selectedAddress });
-	};
+const Step2 = ({ formData, handleChange, prevStep, nextStep }) => {
+	// This will create a preview URL for the uploaded image
+	const imagePreview = formData.image ? URL.createObjectURL(formData.image) : assets.upload_area;
 
 	return (
-		<div className='step2'>
-			<h1>Select Address</h1>
-			<button onClick={() => navigate("/address/add")}>Add Address</button>
+		<div className='step-2-container'>
+			<h2>Select Clothes, Condition, and Preferred Action</h2>
 
-			<table className='address-table'>
-				<thead>
-					<tr>
-						<th>Select</th>
-						<th>Street</th>
-						<th>City</th>
-						<th>State</th>
-						<th>Postal Code</th>
-						<th>Country</th>
-						<th>Phone Number</th>
-						<th>Action</th> {/* Added Action column */}
-					</tr>
-				</thead>
-				<tbody>
-					{addresses.length > 0 ? (
-						addresses.map((address) => (
-							<tr key={address._id}>
-								<td>
-									<input
-										type='radio'
-										name='selectedAddress'
-										value={address._id}
-										onChange={() => setSelectedAddress(address._id)}
-									/>
-								</td>
-								<td>{address.street}</td>
-								<td>{address.city}</td>
-								<td>{address.state}</td>
-								<td>{address.postalCode}</td>
-								<td>{address.country}</td>
-								<td>{address.phoneNumber}</td>
-								<td>
-									<p
-										onClick={() => removeAddress(address._id)}
-										className='delete-icon cursor'>
-										X
-									</p>
-								</td>
-							</tr>
-						))
-					) : (
-						<tr>
-							<td colSpan='8' className='no-data'>
-								{" "}
-								{/* Change colSpan to 8 */}
-								No addresses available
-							</td>
-						</tr>
-					)}
-				</tbody>
-			</table>
+			{/* Clothes Type */}
+			<div className='clothes-type'>
+				<p>Clothes Type</p>
+				<select
+					className='select-input'
+					name='apparelType'
+					onChange={handleChange}
+					value={formData.apparelType}>
+					<option value=''>--Select Type--</option>
+					<option value='Shirt'>Shirt</option>
+					<option value='T-shirt'>T-shirt</option>
+					<option value='Jeans'>Jeans</option>
+					<option value='Jacket'>Jacket</option>
+					<option value='Sweater'>Sweater</option>
+					<option value='Skirt'>Skirt</option>
+					<option value='Pants'>Pants</option>
+					<option value='Other'>Other</option>
+				</select>
+			</div>
 
-			<button className='next-button' onClick={handleNext}>
-				Next
-			</button>
+			{/* Condition */}
+			<div className='condition'>
+				<p>Condition</p>
+				<select
+					className='select-input'
+					name='condition'
+					onChange={handleChange}
+					value={formData.condition}>
+					<option value=''>--Select Condition--</option>
+					<option value='Good for donation'>Good for donation</option>
+					<option value='Needs recycling'>Needs recycling</option>
+					<option value='For disposal only'>For disposal only</option>
+				</select>
+			</div>
+
+			{/* Preferred Action */}
+			<div className='preferred-action'>
+				<p>Preferred Action</p>
+				<select
+					className='select-input'
+					name='preferredAction'
+					onChange={handleChange}
+					value={formData.preferredAction}>
+					<option value=''>--Select Action--</option>
+					<option value='Donate'>Donate</option>
+					<option value='Recycle'>Recycle</option>
+					<option value='Dispose'>Dispose</option>
+				</select>
+			</div>
+
+			{/* Image Upload */}
+			<div className='upload-image'>
+				<p>Upload Image</p>
+				<label htmlFor='image'>
+					<img src={imagePreview} alt='Upload Area' />
+				</label>
+				<input
+					type='file'
+					id='image'
+					onChange={(e) => handleChange(e, "image", e.target.files[0])} // Pass the file through handleChange
+					hidden
+					required
+				/>
+			</div>
+
+			{/* Navigation Buttons */}
+			<div className='navigation-buttons'>
+				<button className='prev-button' onClick={prevStep}>
+					Previous
+				</button>
+				<button
+					className='next-button'
+					disabled={
+						!formData.apparelType ||
+						!formData.condition ||
+						!formData.preferredAction ||
+						!formData.image
+					}
+					onClick={nextStep}>
+					Next
+				</button>
+			</div>
 		</div>
 	);
 };

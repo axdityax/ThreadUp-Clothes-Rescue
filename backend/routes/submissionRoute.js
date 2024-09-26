@@ -6,7 +6,7 @@ import {
 	updateSubmission,
 	deleteSubmission,
 } from "../controllers/submissionController.js";
-import { isAuthenticated } from "../middleware/auth.js"; // Middleware to verify user authentication
+import authMiddleware from "../middleware/auth.js"; // Middleware to verify user authentication
 
 const submissionRouter = express.Router();
 

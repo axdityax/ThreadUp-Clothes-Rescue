@@ -1,0 +1,107 @@
+/* Step1.css */
+
+.step1-container {
+	max-width: 80%; /* Limit the width of the container */
+	margin: auto; /* Center the container */
+	margin-top: 2%; /* Space above the container */
+	padding: 20px; /* Inner spacing */
+	border: 1px solid #ccc; /* Light gray border */
+	border-radius: 8px; /* Rounded corners */
+	box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+	background-color: #f9f9f9; /* Light background color */
+}
+
+h2 {
+	text-align: center; /* Center the heading */
+	margin-bottom: 20px; /* Space below the heading */
+	color: #333; /* Darker text color */
+}
+
+.address-table {
+	width: 100%; /* Full width for the table */
+	border-collapse: collapse; /* Remove space between table cells */
+	margin-top: 20px; /* Space between heading and table */
+}
+
+.address-table th,
+.address-table td {
+	padding: 12px; /* Padding for table cells */
+	border-bottom: 1px solid #ddd; /* Light gray border for rows */
+}
+
+/* Align Select and Action columns to the center */
+.address-table th:nth-child(1),
+.address-table td:nth-child(1),
+.address-table th:nth-child(3),
+.address-table td:nth-child(3) {
+	text-align: center; /* Center align text in Select and Action columns */
+}
+
+.address-table th:nth-child(2),
+.address-table td:nth-child(2) {
+	text-align: left; /* Left align text in Address column */
+}
+
+.address-table th {
+	background-color: #007bff; /* Bootstrap primary color */
+	color: white; /* White text color for headers */
+}
+
+/* Set specific widths for each column */
+.address-table th:nth-child(1),
+.address-table td:nth-child(1) {
+	width: 20%; /* 20% for the Select column */
+}
+
+.address-table th:nth-child(2),
+.address-table td:nth-child(2) {
+	width: 70%; /* 70% for the Address column */
+}
+
+.address-table th:nth-child(3),
+.address-table td:nth-child(3) {
+	width: 10%; /* 10% for the Action column */
+}
+
+.no-data {
+	text-align: center; /* Center the no-data message */
+	color: #888; /* Gray color for no data message */
+	font-style: italic; /* Italicize the text for emphasis */
+	padding: 20px 0; /* Spacing above and below */
+}
+
+.button-group {
+	display: flex; /* Use flexbox for button alignment */
+	justify-content: space-between; /* Space between buttons */
+	margin-top: 20px; /* Space above buttons */
+}
+
+.add-address-button,
+.next-button,
+.remove-address-button {
+	padding: 10px 15px; /* Padding for buttons */
+	border: none; /* Remove border */
+	border-radius: 5px; /* Rounded corners for buttons */
+	cursor: pointer; /* Pointer cursor on hover */
+}
+
+.add-address-button {
+	background-color: #28a745; /* Green background for add button */
+	color: white; /* White text color */
+}
+
+.next-button {
+	background-color: #007bff; /* Bootstrap primary color */
+	color: white; /* White text color */
+}
+
+.remove-address-button {
+	background-color: #dc3545; /* Red background for remove button */
+	color: white; /* White text color */
+}
+
+.remove-address-button:hover,
+.add-address-button:hover,
+.next-button:hover {
+	opacity: 0.9; /* Slightly reduce opacity on hover */
+}
