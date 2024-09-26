@@ -1,5 +1,6 @@
 import mongoose from "mongoose";
 
+// User Schema
 const userSchema = new mongoose.Schema(
 	{
 		name: {
@@ -21,7 +22,6 @@ const userSchema = new mongoose.Schema(
 				ref: "Submission",
 			},
 		],
-		// A user can have many addresses, but they are not required at the time of login
 		addresses: [
 			{
 				type: mongoose.Schema.Types.ObjectId,
@@ -32,6 +32,6 @@ const userSchema = new mongoose.Schema(
 	{ timestamps: true }
 );
 
-const userModel = mongoose.models.user || mongoose.model("user", userSchema);
+const userModel = mongoose.models.User || mongoose.model("User", userSchema);
 
 export default userModel;

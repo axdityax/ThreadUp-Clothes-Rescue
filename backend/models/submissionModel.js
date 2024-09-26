@@ -1,5 +1,6 @@
 import mongoose from "mongoose";
 
+// Submission Schema
 const submissionSchema = new mongoose.Schema(
 	{
 		userId: {
@@ -34,11 +35,11 @@ const submissionSchema = new mongoose.Schema(
 		},
 		center: {
 			type: mongoose.Schema.Types.ObjectId,
-			ref: "Center", // Reference to the Center model
+			ref: "Center",
 			required: true,
 		},
 		image: {
-			type: String, // Store image URL or file path
+			type: String,
 			required: true,
 		},
 		submissionDate: {
@@ -50,6 +51,6 @@ const submissionSchema = new mongoose.Schema(
 );
 
 const submissionModel =
-	mongoose.models.submission || mongoose.model("submission", submissionSchema);
+	mongoose.models.Submission || mongoose.model("Submission", submissionSchema);
 
 export default submissionModel;

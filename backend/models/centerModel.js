@@ -30,21 +30,18 @@ const centerSchema = new mongoose.Schema(
 		contactInfo: {
 			phone: {
 				type: String,
-				required: false,
 			},
 			email: {
 				type: String,
-				required: false,
 			},
 		},
 		workingHours: {
 			type: String,
-			required: false,
 		},
 	},
 	{ timestamps: true }
 );
 
-const centerModel = mongoose.models.center || mongoose.model("center", centerSchema);
+const centerModel = mongoose.models.Center || mongoose.model("Center", centerSchema);
 
 export default centerModel;

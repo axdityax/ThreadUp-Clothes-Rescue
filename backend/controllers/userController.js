@@ -3,6 +3,7 @@ import jwt from "jsonwebtoken";
 import bcrypt from "bcrypt";
 import validator from "validator";
 import addressModel from "../models/addressModel.js";
+
 const createToken = (id) => {
 	return jwt.sign({ id }, process.env.JWT_SECRET, { expiresIn: "1d" });
 };
@@ -81,9 +82,11 @@ const registerUser = async (req, res) => {
 	}
 };
 
+import mongoose from "mongoose";
+
 const addAddress = async (req, res) => {
 	const { street, city, state, postalCode, country, phoneNumber } = req.body;
-	const userId = req.user.id;
+	const userId = req.user.id; // Assuming you have user info from middleware
 
 	try {
 		// Validate user input
@@ -118,6 +121,13 @@ const addAddress = async (req, res) => {
 		// Save the address to the database
 		const savedAddress = await newAddress.save();
 
+		// Add the new address ID to the user's addresses array
+		await userModel.findByIdAndUpdate(
+			userId,
+			{ $push: { addresses: savedAddress._id } }, // Push the new address ID to the addresses array
+			{ new: true } // Optional: return the updated user document
+		);
+
 		// Return success response with the saved address
 		res.status(201).json({ success: true, data: savedAddress });
 	} catch (error) {
@@ -143,6 +153,13 @@ const removeAddress = async (req, res) => {
 
 		// Remove the address
 		await addressModel.findByIdAndDelete(id);
+
+		// Remove the address ID from the user's addresses array
+		await userModel.findByIdAndUpdate(
+			userId,
+			{ $pull: { addresses: id } }, // Pull the address ID from the addresses array
+			{ new: true } // Optional: return the updated user document
+		);
 
 		return res.status(200).json({
 			success: true,
