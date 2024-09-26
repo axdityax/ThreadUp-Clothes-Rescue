@@ -8,6 +8,7 @@ import Faq from "./pages/Faq/Faq";
 import Track from "./pages/Track/Track";
 import Centers from "./pages/Centers/Centers";
 import Submit from "./pages/Submit/Submit";
+import AddAddress from "./components/SubmitPage/AddAddress/AddAddress";
 
 const App = () => {
 	const [showLogin, setShowLogin] = useState(false);
@@ -20,6 +21,7 @@ const App = () => {
 				<Routes>
 					<Route path='/' element={<Home />} />
 					<Route path='/submit' element={<Submit />} />
+					<Route path='/address/add' element={<AddAddress />} />
 					<Route path='/centers' element={<Centers />} />
 					<Route path='/track' element={<Track />} />
 					<Route path='/faq' element={<Faq />} />

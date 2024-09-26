@@ -1,0 +1,41 @@
+.add-address {
+	padding: 20px;
+}
+
+.address-form {
+	display: flex;
+	flex-direction: column;
+}
+
+.form-group {
+	margin-bottom: 15px;
+}
+
+.form-group label {
+	margin-bottom: 5px;
+	display: block;
+}
+
+.form-group input {
+	padding: 10px;
+	width: 100%;
+	border: 1px solid #ccc;
+	border-radius: 5px;
+}
+
+.submit-button {
+	background-color: #4caf50;
+	color: white;
+	padding: 10px 20px;
+	border: none;
+	cursor: pointer;
+}
+
+.submit-button:hover {
+	background-color: #45a049;
+}
+
+.error-message {
+	color: red;
+	font-weight: bold;
+}

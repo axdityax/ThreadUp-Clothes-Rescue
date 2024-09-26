@@ -2,7 +2,7 @@ import userModel from "../models/userModel.js";
 import jwt from "jsonwebtoken";
 import bcrypt from "bcrypt";
 import validator from "validator";
-
+import addressModel from "../models/addressModel.js";
 const createToken = (id) => {
 	return jwt.sign({ id }, process.env.JWT_SECRET, { expiresIn: "1d" });
 };
@@ -81,4 +81,92 @@ const registerUser = async (req, res) => {
 	}
 };
 
-export { registerUser, loginUser };
+const addAddress = async (req, res) => {
+	const { street, city, state, postalCode, country, phoneNumber } = req.body;
+	const userId = req.user.id;
+
+	try {
+		// Validate user input
+		if (!street || !city || !state || !postalCode || !country || !phoneNumber) {
+			return res.status(400).json({ success: false, message: "Please fill in all fields" });
+		}
+
+		// Optional: Check if the address already exists
+		const existingAddress = await addressModel.findOne({
+			user: userId,
+			street,
+			city,
+			state,
+			postalCode,
+			country,
+		});
+		if (existingAddress) {
+			return res.status(409).json({ success: false, message: "Address already exists" });
+		}
+
+		// Create new address
+		const newAddress = new addressModel({
+			user: userId,
+			street,
+			city,
+			state,
+			postalCode,
+			country,
+			phoneNumber, // Corrected from phone to phoneNumber
+		});
+
+		// Save the address to the database
+		const savedAddress = await newAddress.save();
+
+		// Return success response with the saved address
+		res.status(201).json({ success: true, data: savedAddress });
+	} catch (error) {
+		console.error("Error adding address:", error);
+		res.status(500).json({ success: false, message: "Server error" });
+	}
+};
+
+const removeAddress = async (req, res) => {
+	const userId = req.user.id; // Get the authenticated user's ID
+	const { id } = req.body; // Get the address ID from the request body
+
+	try {
+		// Find the address by ID and check if it belongs to the user
+		const address = await addressModel.findOne({ _id: id, user: userId });
+
+		if (!address) {
+			return res.status(404).json({
+				success: false,
+				message: "Address not found or does not belong to the user",
+			});
+		}
+
+		// Remove the address
+		await addressModel.findByIdAndDelete(id);
+
+		return res.status(200).json({
+			success: true,
+			message: "Address removed successfully",
+		});
+	} catch (error) {
+		console.error("Error removing address:", error);
+		return res.status(500).json({
+			success: false,
+			message: "An error occurred while removing the address",
+		});
+	}
+};
+
+const getAllAddress = async (req, res) => {
+	const userId = req.user.id;
+
+	try {
+		const addresses = await addressModel.find({ user: userId });
+		res.status(200).json({ success: true, data: addresses });
+	} catch (error) {
+		console.error("Error fetching addresses:", error);
+		res.status(500).json({ success: false, message: "Server error" });
+	}
+};
+
+export { registerUser, loginUser, getAllAddress, addAddress, removeAddress };
