@@ -56,7 +56,7 @@ const Center = () => {
 						<th>Phone</th>
 						<th>Email</th>
 						<th>Working Hours</th>
-						<th>Action</th> {/* Added Action column */}
+						<th>Action</th>
 					</tr>
 				</thead>
 				<tbody>

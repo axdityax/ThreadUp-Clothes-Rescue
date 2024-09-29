@@ -7,24 +7,12 @@ export const StoreContext = createContext(null);
 const StoreContextProvider = (props) => {
 	const url = "http://localhost:4000";
 
-	// useEffect(() => {
-	// 	console.log(cartItems);
-	// }, [cartItems]);
-
-	// useEffect(() => {
-	// 	async function loadData() {
-	// 		await fetchFoodList();
-	// 		if (localStorage.getItem("token")) {
-	// 			setToken(localStorage.getItem("token"));
-	// 			await loadCartData(localStorage.getItem("token"));
-	// 		}
-	// 	}
-
-	// 	loadData();
-	// }, []);
+	const [selectedUser, setSelectedUser] = useState(null);
 
 	const contextValue = {
 		url,
+		selectedUser,
+		setSelectedUser,
 	};
 
 	return <StoreContext.Provider value={contextValue}>{props.children}</StoreContext.Provider>;

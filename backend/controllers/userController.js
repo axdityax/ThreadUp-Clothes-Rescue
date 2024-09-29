@@ -82,8 +82,6 @@ const registerUser = async (req, res) => {
 	}
 };
 
-import mongoose from "mongoose";
-
 const addAddress = async (req, res) => {
 	const { street, city, state, postalCode, country, phoneNumber } = req.body;
 	const userId = req.user.id; // Assuming you have user info from middleware
@@ -214,4 +212,97 @@ const getAddressById = async (req, res) => {
 	}
 };
 
-export { registerUser, loginUser, getAllAddress, addAddress, removeAddress, getAddressById };
+// Get all users
+const getAllUsers = async (req, res) => {
+	try {
+		// Fetch all users from the database
+		const users = await userModel.find().populate("submittedItems").populate("addresses");
+		// Send the list of users as a response
+		res.status(200).json(users);
+	} catch (error) {
+		// Handle errors
+		res.status(500).json({ message: "Error retrieving users", error });
+	}
+};
+
+// Get one user by ID
+const getOneUser = async (req, res) => {
+	try {
+		// Extract the user ID from the request body
+		const { id } = req.body;
+
+		// Fetch the user by ID from the database
+		const user = await userModel.findById(id).populate("submittedItems").populate("addresses");
+
+		// If the user is not found, send a 404 response
+		if (!user) {
+			return res.status(404).json({ message: "User not found" });
+		}
+
+		// Send the user data as a response
+		res.status(200).json(user);
+	} catch (error) {
+		// Handle errors
+		res.status(500).json({ message: "Error retrieving user", error });
+	}
+};
+
+// Remove one user by ID
+const removeOneUser = async (req, res) => {
+	try {
+		// Extract the user ID from the request body
+		const { id } = req.body;
+
+		// Check if the user exists in the database
+		const user = await userModel.findById(id);
+
+		// If the user is not found, send a 404 response
+		if (!user) {
+			return res.status(404).json({ message: "User not found" });
+		}
+
+		// Remove the user from the database
+		await userModel.findByIdAndDelete(id);
+
+		// Send a success message as a response
+		res.status(200).json({ message: "User removed successfully" });
+	} catch (error) {
+		// Handle errors
+		res.status(500).json({ message: "Error removing user", error });
+	}
+};
+
+// Remove one user by ID
+const deleteUser = async (req, res) => {
+	try {
+		const { id } = req.params; // Extract user ID from request parameters
+
+		// Find the user by ID and delete them
+		const deletedUser = await userModel.findByIdAndDelete(id);
+
+		if (!deletedUser) {
+			return res.status(404).json({ message: "User not found." });
+		}
+
+		// Optionally, handle cleanup of related documents (e.g., submittedItems, addresses)
+		// You can also delete related items here if needed
+
+		return res.status(200).json({ message: "User deleted successfully." });
+	} catch (error) {
+		console.error("Error deleting user:", error);
+		return res.status(500).json({ message: "Server error while deleting user." });
+	}
+};
+
+export {
+	registerUser,
+	loginUser,
+	getAllAddress,
+	addAddress,
+	removeAddress,
+	getAddressById,
+	getAllUsers,
+	removeOneUser,
+	getOneUser,
+	deleteUser,
+};

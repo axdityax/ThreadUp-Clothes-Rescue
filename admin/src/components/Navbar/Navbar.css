@@ -5,8 +5,10 @@
 	padding: 8px 4%;
 }
 
-.navbar .logo {
-	width: max(10%, 80px);
+.admin-logo {
+	font-weight: 700;
+	font-size: 28px;
+	color: tomato;
 }
 
 .navbar .profile {

@@ -1,0 +1,88 @@
+.submissions-container {
+	margin: auto;
+	width: 75%;
+	padding: 20px; /* Added padding for better spacing */
+}
+
+.submission-list {
+	display: flex;
+	flex-direction: column; /* Ensure items are stacked vertically */
+	justify-content: center;
+	align-items: center; /* Center align items */
+}
+
+.submission-item {
+	border: 1px solid #3498db; /* Light blue border for distinction */
+	padding: 20px;
+	margin: 15px 0; /* Reduced margin for a tighter layout */
+	font-size: 14px;
+	color: #505050;
+	display: grid;
+	grid-template-columns: 1fr 3fr 1fr 1fr; /* 4 columns layout */
+	align-items: start; /* Align items to the start of the grid cell */
+	gap: 20px; /* Gap between grid items */
+	background-color: #f4faff; /* Light blue background */
+	border-radius: 8px; /* Rounded corners for a smoother look */
+	transition: box-shadow 0.3s; /* Smooth transition for hover effect */
+}
+
+.submission-item:hover {
+	box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1); /* Shadow effect on hover */
+}
+
+.submission-details {
+	display: flex;
+	flex-direction: column; /* Stack details vertically */
+	gap: 5px; /* Space between detail items */
+}
+
+.submission-image {
+	width: 150px; /* Set your desired width */
+	height: 150px; /* Set your desired height */
+	object-fit: cover; /* Maintain aspect ratio and cover the area */
+	border-radius: 4px; /* Optional: Rounded corners for images */
+}
+
+.submission-status {
+	display: flex;
+	align-items: center; /* Center the status dropdown vertically */
+}
+
+.submission-item select {
+	background-color: #ebf5fc; /* Light blue background for the select */
+	border: 1px solid #3498db; /* Match the border color */
+	width: max(10vw, 120px); /* Responsive width for select */
+	padding: 7px;
+	outline: none;
+	border-radius: 4px; /* Slightly rounded corners */
+	font-size: 14px;
+	transition: border-color 0.3s; /* Smooth transition for border color */
+	margin: 5px;
+}
+
+/* Focus state for accessibility */
+.submission-item select:focus {
+	border-color: #2980b9; /* Darker blue on focus */
+}
+
+.sorting-submissions {
+	display: grid;
+	justify-content: space-between;
+	gap: 20px;
+	grid-template-columns: 3fr 1fr;
+	align-items: start; /* Align items to the start of the grid cell */
+}
+
+/* Media queries for smaller screen sizes */
+@media (max-width: 1000px) {
+	.submission-item {
+		font-size: 12px; /* Slightly smaller font size */
+		grid-template-columns: 1fr 2fr 1fr; /* Adjust columns on smaller screens */
+		padding: 15px 8px; /* Adjust padding */
+	}
+
+	.submission-image {
+		width: 80px; /* Smaller image for responsive design */
+		height: 80px; /* Maintain aspect ratio */
+	}
+}

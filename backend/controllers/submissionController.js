@@ -1,5 +1,6 @@
 import submissionModel from "../models/submissionModel.js";
 import userModel from "../models/userModel.js";
+
 // Controller for creating a new submission
 const createSubmission = async (req, res) => {
 	try {
@@ -37,7 +38,6 @@ const createSubmission = async (req, res) => {
 	}
 };
 
-
 const getUserSubmissions = async (req, res) => {
 	try {
 		// Fetch submissions and populate the user, submittedItems, addresses, location, and center
@@ -60,8 +60,6 @@ const getUserSubmissions = async (req, res) => {
 		return res.status(500).json({ error: error.message });
 	}
 };
-
-
 
 // Controller to get a single submission by its ID
 const getSubmissionById = async (req, res) => {
@@ -115,10 +113,28 @@ const deleteSubmission = async (req, res) => {
 	}
 };
 
+const getAllSubmissions = async (req, res) => {
+	try {
+		// Fetch all submissions, populating user and location details
+		const submissions = await submissionModel
+			.find({})
+			.populate("userId", "name email") // Populate user name and email
+			.populate("location") // Populate address details
+			.populate("center"); // Populate center details (if necessary)
+
+		// Send submissions data as a response
+		res.status(200).json(submissions);
+	} catch (error) {
+		// Handle errors
+		res.status(500).json({ message: "Error fetching submissions", error });
+	}
+};
+
 export {
 	deleteSubmission,
 	updateSubmission,
 	getSubmissionById,
 	getUserSubmissions,
 	createSubmission,
+	getAllSubmissions,
 };

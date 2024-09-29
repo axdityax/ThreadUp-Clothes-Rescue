@@ -8,7 +8,7 @@ import Dashboard from "./pages/Dashboard/Dashboard";
 import Users from "./pages/Users/Users";
 import Submissions from "./pages/Submissions/Submissions";
 import Center from "./pages/Center/Center";
-import AddCenter from "./components/Center/AddCenter/AddCenter";
+import AddCenter from "./components/CenterPage/AddCenter/AddCenter";
 
 const App = () => {
 	return (
@@ -23,7 +23,7 @@ const App = () => {
 					<Route path='/center/add' element={<AddCenter />} />
 					<Route path='/dashboard' element={<Dashboard />} />
 					<Route path='/submissions' element={<Submissions />} />
-					<Route path='/users' element={<Users />} />
+					<Route path='/users/*' element={<Users />} />
 				</Routes>
 			</div>
 		</div>
