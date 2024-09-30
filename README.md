@@ -9,8 +9,6 @@ ThreadUP is a platform that allows users to submit information about their unuse
 - [Technologies Used](#technologies-used)
 - [Installation](#installation)
 - [Usage](#usage)
-- [Contributing](#contributing)
-- [License](#license)
 
 ## Features
 
