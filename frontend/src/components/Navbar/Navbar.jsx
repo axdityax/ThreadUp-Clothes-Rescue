@@ -1,13 +1,17 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import "./Navbar.css";
 import { useNavigate } from "react-router-dom";
 import { StoreContext } from "../../context/StoreContext";
 import { assets } from "../../assets/assets";
 
 const Navbar = ({ setShowLogin }) => {
-	const [menu, setMenu] = useState("home");
 	const { token, setToken } = useContext(StoreContext);
 	const navigate = useNavigate();
+	const [menu, setMenu] = useState(localStorage.getItem("menu") || "home"); // Retrieve from localStorage
+
+	useEffect(() => {
+		localStorage.setItem("menu", menu); 
+	}, [menu]);
 
 	const logout = () => {
 		localStorage.removeItem("token");
@@ -15,46 +19,51 @@ const Navbar = ({ setShowLogin }) => {
 		navigate("/");
 	};
 
+	const handleMenuClick = (menuName) => {
+		setMenu(menuName);
+		navigate(menuName === "home" ? "/" : `/${menuName}`);
+	};
+
 	return (
 		<div className='navbar'>
-			<div className='logo'>ThreadUp</div>
+			<div
+				style={{ cursor: "pointer" }}
+				onClick={() => {
+					navigate("/");
+					setMenu("home");
+				}}
+				className='logo'
+				role='button'
+				tabIndex='0'
+				onKeyPress={(e) => e.key === "Enter" && navigate("/")}>
+				ThreadUp
+			</div>
+
 			<div className='navbar-menu'>
 				<div
-					onClick={() => {
-						setMenu("home");
-						navigate("/");
-					}}
+					onClick={() => handleMenuClick("home")}
 					className={menu === "home" ? "active" : ""}>
 					home
 				</div>
 				<div
-					onClick={() => {
-						setMenu("menu");
-						navigate("/submit");
-					}}
-					className={menu === "menu" ? "active" : ""}>
+					onClick={() => handleMenuClick("submit")}
+					className={menu === "submit" ? "active" : ""}>
 					submit
 				</div>
 				<div
-					onClick={() => {
-						setMenu("mobile-app");
-						navigate("/track");
-					}}
-					className={menu === "mobile-app" ? "active" : ""}>
+					onClick={() => handleMenuClick("track")}
+					className={menu === "track" ? "active" : ""}>
 					track
 				</div>
 				<div
-					onClick={() => {
-						setMenu("faq");
-						navigate("/faq");
-					}}
+					onClick={() => handleMenuClick("faq")}
 					className={menu === "faq" ? "active" : ""}>
 					faq
 				</div>
 				<a
 					href='#footer'
 					onClick={() => {
-						setMenu("contact-us");
+						handleMenuClick("contact-us");
 						document.getElementById("footer");
 					}}
 					className={menu === "contact-us" ? "active" : ""}>
@@ -75,10 +84,10 @@ const Navbar = ({ setShowLogin }) => {
 						<ul className='nav-profile-dropdown'>
 							<li
 								onClick={() => {
-									navigate("/myorders");
+									navigate("/track");
 								}}>
 								<img src={assets.bag_icon} alt='' />
-								<p>Orders</p>
+								<p>Track</p>
 							</li>
 							<hr />
 							<li onClick={logout}>

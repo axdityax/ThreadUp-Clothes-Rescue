@@ -37,7 +37,7 @@ const Track = () => {
 
 	// Handle sorting submissions based on selected criteria
 	const sortSubmissions = (submissions) => {
-		const sortedSubmissions = [...submissions]; // Create a copy to avoid mutating original
+		const sortedSubmissions = [...submissions];
 		return sortedSubmissions.sort((a, b) => {
 			if (sortCriteria === "date") {
 				return new Date(b.submissionDate) - new Date(a.submissionDate); // Latest date first

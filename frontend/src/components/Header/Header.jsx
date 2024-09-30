@@ -16,7 +16,7 @@ const Header = () => {
 				<p>
 					Looking to get rid of your unused or worn-out clothes? <br />
 					Whether you want to donate, recycle, or responsibly dispose of them,{" "}
-					<b>ThreadUp</b> is here to help! Our platform connects you with nearby centers
+					<b>ThreadUp</b> is here to help! <br />Our platform connects you with nearby centers
 					that ensure your clothes are handled sustainably, making it easy for you to
 					contribute to the environment while helping those in need.
 				</p>

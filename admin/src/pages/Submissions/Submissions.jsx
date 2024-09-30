@@ -65,7 +65,7 @@ const Submissions = () => {
 			} else if (sortCriteria === "completed") {
 				return a.submissionStatus === "Completed" ? -1 : 1; // Completed first
 			}
-			return 0; // Fallback in case no sorting criteria matches
+			return 0; 
 		});
 	};
 

@@ -3,18 +3,25 @@ import authMiddleware from "../middleware/auth.js";
 import { createCenter, deleteCenter, getAllCenters } from "../controllers/centerController.js";
 import { getAllUsers, deleteUser, getOneUser } from "../controllers/userController.js";
 import { getAllSubmissions, updateSubmissionStatus } from "../controllers/submissionController.js";
+import {
+	getCenterStats,
+	getSubmissionStats,
+	getUserStats,
+} from "../controllers/statsController.js";
 
 const adminRouter = express.Router();
 
-// Admin panel routes (authentication required)
 adminRouter.get("/allusers", getAllUsers);
 adminRouter.post("/users/oneuser", getOneUser);
 adminRouter.post("/users/delete/:id", deleteUser);
-
 adminRouter.get("/submissions/all", getAllSubmissions);
 adminRouter.post("/submissions/status", updateSubmissionStatus);
-// router.delete("/submissions/:id", authMiddleware, deleteSubmission);
+
 adminRouter.post("/center/add", createCenter);
 adminRouter.post("/center/remove", deleteCenter);
 adminRouter.get("/allcenter", getAllCenters);
+
+adminRouter.get("/center/stats", getCenterStats);
+adminRouter.get("/submission/stats", getSubmissionStats);
+adminRouter.get("/user/stats", getUserStats);
 export default adminRouter;
