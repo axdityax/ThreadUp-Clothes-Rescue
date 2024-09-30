@@ -3,7 +3,7 @@ import jwt from "jsonwebtoken";
 import bcrypt from "bcrypt";
 import validator from "validator";
 import addressModel from "../models/addressModel.js";
-
+import submissionModel from "../models/submissionModel.js";
 const createToken = (id) => {
 	return jwt.sign({ id }, process.env.JWT_SECRET, { expiresIn: "1d" });
 };
@@ -277,17 +277,23 @@ const deleteUser = async (req, res) => {
 	try {
 		const { id } = req.params; // Extract user ID from request parameters
 
-		// Find the user by ID and delete them
-		const deletedUser = await userModel.findByIdAndDelete(id);
+		// Find the user by ID
+		const user = await userModel.findById(id).populate("submittedItems addresses");
 
-		if (!deletedUser) {
+		if (!user) {
 			return res.status(404).json({ message: "User not found." });
 		}
 
-		// Optionally, handle cleanup of related documents (e.g., submittedItems, addresses)
-		// You can also delete related items here if needed
+		// Delete all submissions related to the user
+		await submissionModel.deleteMany({ userId: id });
 
-		return res.status(200).json({ message: "User deleted successfully." });
+		// Delete all addresses related to the user
+		await addressModel.deleteMany({ user: id });
+
+		// Finally, delete the user
+		await userModel.findByIdAndDelete(id);
+
+		return res.status(200).json({ message: "User and related data deleted successfully." });
 	} catch (error) {
 		console.error("Error deleting user:", error);
 		return res.status(500).json({ message: "Server error while deleting user." });

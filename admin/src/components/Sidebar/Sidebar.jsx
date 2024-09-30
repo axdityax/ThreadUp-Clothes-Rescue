@@ -8,7 +8,7 @@ const Sidebar = () => {
 		<div className='sidebar'>
 			<div className='sidebar-options'>
 				<NavLink
-					to='/dashboard'
+					to='/'
 					className='sidebar-option'
 					activeClassName='active' // Highlight when active
 				>

@@ -17,8 +17,6 @@ const port = process.env.PORT || 4000;
 
 // Serve static files from the uploads folder
 app.use("/uploads", express.static(path.join(__dirname, "uploads")));
-console.log("Resolved __dirname:", __dirname);
-console.log("Serving static files from:", path.resolve(__dirname, "uploads"));
 
 // middleware
 app.use(express.json()); // Parse incoming JSON data

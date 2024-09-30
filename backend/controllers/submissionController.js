@@ -1,6 +1,8 @@
 import submissionModel from "../models/submissionModel.js";
 import userModel from "../models/userModel.js";
-
+import nodemailer from "nodemailer";
+import dotenv from "dotenv";
+dotenv.config();
 // Controller for creating a new submission
 const createSubmission = async (req, res) => {
 	try {
@@ -76,35 +78,65 @@ const getSubmissionById = async (req, res) => {
 	}
 };
 
-// Controller to update a submission (e.g., changing submissionStatus)
+let testAccount = await nodemailer.createTestAccount();
+
+const transporter = nodemailer.createTransport({
+	host: "smtp.ethereal.email",
+	port: 587,
+	secure: false, // true for port 465, false for other ports
+	auth: {
+		user: testAccount.user,
+		pass: testAccount.pass,
+	},
+});
+
+const sendEmail = async (userEmail, userName, status) => {
+	const mailOptions = {
+		from: process.env.EMAIL_USER || "your_test_account@ethereal.email", // Use a default for Ethereal
+		to: userEmail,
+		subject: "Submission Status Update",
+		text: `Dear ${userName},\n\nYour submission status has been updated to "${status}".\n\nBest regards,\nYour Company`,
+	};
+	console.log(mailOptions);
+	try {
+		await transporter.sendMail(mailOptions);
+		console.log("Email sent successfully");
+	} catch (error) {
+		console.error("Error sending email:", error);
+		throw new Error("Email sending failed"); // Propagate the error
+	}
+};
+
 const updateSubmissionStatus = async (req, res) => {
 	try {
 		const { submissionId, status } = req.body;
-
-		// Check if all required fields are provided
 		if (!submissionId || !status) {
 			return res.status(400).json({ success: false, message: "All fields are required" });
 		}
 
-		// Validate the status value
 		const validStatuses = ["Submitted", "Processing", "Completed"];
 		if (!validStatuses.includes(status)) {
 			return res.status(400).json({ success: false, message: "Invalid status value" });
 		}
 
-		// Find the submission by ID and update the status
 		const updatedSubmission = await submissionModel.findByIdAndUpdate(
 			submissionId,
 			{ submissionStatus: status },
 			{ new: true }
 		);
 
-		// If submission is not found, return error
 		if (!updatedSubmission) {
 			return res.status(404).json({ success: false, message: "Submission not found" });
 		}
 
-		// Send a success response with the updated submission
+		const user = await userModel.findById(updatedSubmission.userId);
+		if (!user || !user.email) {
+			return res
+				.status(404)
+				.json({ success: false, message: "User not found or email not available" });
+		}
+
+		await sendEmail(user.email, user.name, status); // Send email, any error will be caught in the function
 		res.status(200).json({
 			success: true,
 			message: "Submission status updated successfully",
