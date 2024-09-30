@@ -6,7 +6,6 @@ import Footer from "./components/Footer/Footer";
 import LoginPopup from "./components/LoginPopup/LoginPopup";
 import Faq from "./pages/Faq/Faq";
 import Track from "./pages/Track/Track";
-import Centers from "./pages/Centers/Centers";
 import Submit from "./pages/Submit/Submit";
 import AddAddress from "./components/SubmitPage/AddAddress/AddAddress";
 

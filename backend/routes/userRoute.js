@@ -9,7 +9,11 @@ import {
 } from "../controllers/userController.js";
 import { getAllCenters, getCenterById } from "../controllers/centerController.js";
 import authMiddleware from "../middleware/auth.js";
-import { createSubmission, getUserSubmissions } from "../controllers/submissionController.js";
+import {
+	createSubmission,
+	getAllUserSubmissions,
+	getUserSubmissions,
+} from "../controllers/submissionController.js";
 import multer from "multer";
 
 const userRouter = express.Router();
@@ -33,5 +37,6 @@ userRouter.get("/center/:id", authMiddleware, getCenterById);
 userRouter.get("/allcenter", authMiddleware, getAllCenters);
 userRouter.post("/submit/details", authMiddleware, upload.single("image"), createSubmission);
 userRouter.get("/submissions", authMiddleware, getUserSubmissions);
+userRouter.get("/track", authMiddleware, getAllUserSubmissions);
 
 export default userRouter;

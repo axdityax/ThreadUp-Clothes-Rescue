@@ -2,7 +2,7 @@ import express from "express";
 import authMiddleware from "../middleware/auth.js";
 import { createCenter, deleteCenter, getAllCenters } from "../controllers/centerController.js";
 import { getAllUsers, deleteUser, getOneUser } from "../controllers/userController.js";
-import { getAllSubmissions } from "../controllers/submissionController.js";
+import { getAllSubmissions, updateSubmissionStatus } from "../controllers/submissionController.js";
 
 const adminRouter = express.Router();
 
@@ -12,7 +12,7 @@ adminRouter.post("/users/oneuser", getOneUser);
 adminRouter.post("/users/delete/:id", deleteUser);
 
 adminRouter.get("/submissions/all", getAllSubmissions);
-// router.put("/submissions/:id", authMiddleware, updateSubmissionStatus);
+adminRouter.post("/submissions/status", updateSubmissionStatus);
 // router.delete("/submissions/:id", authMiddleware, deleteSubmission);
 adminRouter.post("/center/add", createCenter);
 adminRouter.post("/center/remove", deleteCenter);
