@@ -3,6 +3,9 @@
 
 ThreadUP is a platform that allows users to submit information about their unused or worn-out apparel for proper disposal, donation, or recycling. This Minimum Viable Product (MVP) features a user-friendly interface for both users and administrators, making it easy to manage submissions and analytics.
 
+## Live Demo
+-[ThreadUp - Demo](https://drive.google.com/file/d/140IZlEV2jLUmF0uDQaR_hnhG_abMqcZw/view?usp=sharing)
+  
 ## Table of Contents
 
 - [Features](#features)
