@@ -5,7 +5,8 @@ ThreadUP is a platform that allows users to submit information about their unuse
 
 ## Live Demo
 -[ThreadUp - Demo](https://drive.google.com/file/d/140IZlEV2jLUmF0uDQaR_hnhG_abMqcZw/view?usp=sharing)
-  
+-[ThreadUp - Live - Frontend](https://threadup-frontend.onrender.com)
+-[ThreadUp - Live - admin](https://threadup-admin.onrender.com)
 ## Table of Contents
 
 - [Features](#features)
