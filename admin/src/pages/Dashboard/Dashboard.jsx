@@ -159,13 +159,16 @@ const Dashboard = () => {
 			)}
 
 			{activeSection === "submissions" && (
-				<div className='chart-container'>
-					<h3>Submission Analytics</h3>
-					<div className='analytics-charts'>
-						<Pie data={submissionChartData} options={{ responsive: true }} />
-					</div>
-				</div>
+			  <div className='chart-container'>
+			    <h3>Submission Analytics</h3>
+			    <div className='analytics-charts'>
+			      <div style={{ width: "300px", height: "300px" }}> {/* Adjust size here */}
+			        <Pie data={submissionChartData} options={{ responsive: true }} />
+			      </div>
+			    </div>
+			  </div>
 			)}
+
 
 			{activeSection === "trends" && (
 				<div className='chart-container'>
