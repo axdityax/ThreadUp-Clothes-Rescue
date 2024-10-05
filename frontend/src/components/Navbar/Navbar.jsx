@@ -19,14 +19,15 @@ const Navbar = ({ setShowLogin }) => {
     navigate("/");
   };
 
-  const handleMenuClick = (menuName) => {
-    if (menuName === "submit" && !token) {
-      setShowLogin(true);
-    } else {
-      setMenu(menuName);
-      navigate(menuName === "home" ? "/" : `/${menuName}`);
-    }
-  };
+ const handleMenuClick = (menuName) => {
+  if ((menuName === "submit" || menuName === "track") && !token) {
+    setShowLogin(true);
+  } else {
+    setMenu(menuName);
+    navigate(menuName === "home" ? "/" : `/${menuName}`);
+  }
+};
+
 
   return (
     <div className='navbar'>
