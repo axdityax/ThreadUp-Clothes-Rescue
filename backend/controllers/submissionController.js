@@ -1,6 +1,6 @@
 import submissionModel from "../models/submissionModel.js";
 import userModel from "../models/userModel.js";
-
+import nodemailer from "nodemailer";
 import dotenv from "dotenv";
 dotenv.config();
 // Controller for creating a new submission
