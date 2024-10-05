@@ -1,6 +1,6 @@
 import submissionModel from "../models/submissionModel.js";
 import userModel from "../models/userModel.js";
-import nodemailer from "nodemailer";
+
 import dotenv from "dotenv";
 dotenv.config();
 // Controller for creating a new submission
@@ -136,7 +136,7 @@ const updateSubmissionStatus = async (req, res) => {
 				.json({ success: false, message: "User not found or email not available" });
 		}
 
-		await sendEmail(user.email, user.name, status); // Send email, any error will be caught in the function
+		// await sendEmail(user.email, user.name, status); // Send email, any error will be caught in the function
 		res.status(200).json({
 			success: true,
 			message: "Submission status updated successfully",
