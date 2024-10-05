@@ -5,7 +5,7 @@ import axios from "axios";
 export const StoreContext = createContext(null);
 
 const StoreContextProvider = (props) => {
-	const url = "http://localhost:4000";
+	const url = "https://threadup-backend.onrender.com";
 
 	const [selectedUser, setSelectedUser] = useState(null);
 
