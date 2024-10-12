@@ -19,7 +19,7 @@ To run the project locally, follow these steps:
 
 1. Clone the repository:
    ```bash
-   git clone [https://github.com/axdityax/ThreadUp-Clothes-Rescue.git]
+   git clone https://github.com/axdityax/ThreadUp-Clothes-Rescue.git
    cd ThreadUP
    ```
 
