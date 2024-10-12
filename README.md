@@ -13,49 +13,6 @@ ThreadUP is a platform that allows users to submit information about their unuse
 - [Technologies Used](#technologies-used)
 - [Installation](#installation)
 - [Usage](#usage)
-
-## Features
-
-### Admin Dashboard
-- **Submission Analytics**: View trending months and submission statistics.
-- **User Analytics**: Monitor active and inactive users.
-- **Center Analytics**: Visualize data using a heatmap and track capacity.
-
-### User Functionality
-- **User Page**: 
-  - Delete users.
-  - Check user details and their submissions.
-  
-- **Submission Page**: 
-  - View submissions by user.
-  - Sort submissions by type (Recycle, Dispose, Donation).
-  - Search submissions by user name.
-
-### Frontend
-- **Home Page**: Overview of the platform and its purpose.
-- **User Login**: Secure login system with JWT for session management.
-- **Submission Process**:
-  - Add address, select center, and choose clothes in a stepwise manner.
-  - Review submission details before final submission.
-- **Track Page**: 
-  - Track user submissions.
-  - Sort functionality and search by apparel type.
-- **FAQ Page**: Answers to common questions.
-- **Contact Page**: Contact information for support and inquiries.
-
-## Technologies Used
-- **Frontend**: 
-  - React
-  - Redux (for state management)
-  - Axios (for API calls)
-  - CSS/Styled Components
-
-- **Backend**:
-  - Node.js
-  - Express.js
-  - MongoDB (for database)
-  - JWT (for authentication)
-
 ## Installation
 
 To run the project locally, follow these steps:
@@ -117,6 +74,49 @@ To run the project locally, follow these steps:
 5. **Testing the Application**:
    - After both the backend and frontend are running, test the application by logging in as a user and submitting information about apparel.
    - Use the admin dashboard to monitor submissions and user activity.
+
+## Features
+
+### Admin Dashboard
+- **Submission Analytics**: View trending months and submission statistics.
+- **User Analytics**: Monitor active and inactive users.
+- **Center Analytics**: Visualize data using a heatmap and track capacity.
+
+### User Functionality
+- **User Page**: 
+  - Delete users.
+  - Check user details and their submissions.
+  
+- **Submission Page**: 
+  - View submissions by user.
+  - Sort submissions by type (Recycle, Dispose, Donation).
+  - Search submissions by user name.
+
+### Frontend
+- **Home Page**: Overview of the platform and its purpose.
+- **User Login**: Secure login system with JWT for session management.
+- **Submission Process**:
+  - Add address, select center, and choose clothes in a stepwise manner.
+  - Review submission details before final submission.
+- **Track Page**: 
+  - Track user submissions.
+  - Sort functionality and search by apparel type.
+- **FAQ Page**: Answers to common questions.
+- **Contact Page**: Contact information for support and inquiries.
+
+## Technologies Used
+- **Frontend**: 
+  - React
+  - Redux (for state management)
+  - Axios (for API calls)
+  - CSS/Styled Components
+
+- **Backend**:
+  - Node.js
+  - Express.js
+  - MongoDB (for database)
+  - JWT (for authentication)
+
 
 ## Usage
 - Navigate to the home page to learn more about the platform.
